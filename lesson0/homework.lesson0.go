@@ -31,7 +31,7 @@ func getUserData() (uint16, uint16) {
 	fmt.Scan(&yearOfBirth)
 	if yearOfBirth > year {
 		fmt.Printf("Are you form future? \n")
-		fmt.Printf("Current year should be less than %v. \n", year)
+		fmt.Printf("Birth year should be less than %v. \n", year)
 		fmt.Scan(&yearOfBirth)
 	}
 
