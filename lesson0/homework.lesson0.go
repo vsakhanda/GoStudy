@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-const year = uint16(2025)
+//const year = uint16(2025)
 
 var yearOfBirth uint16
 var currentYear uint16
@@ -29,11 +29,11 @@ func greetUser() {
 func getUserData() (uint16, uint16) {
 	fmt.Printf("Enter year of your birth\n")
 	fmt.Scan(&yearOfBirth)
-	if yearOfBirth > year {
-		fmt.Printf("Are you form future? \n")
-		fmt.Printf("Birth year should be less than %v. \n", year)
-		fmt.Scan(&yearOfBirth)
-	}
+	//if yearOfBirth > year {
+	//	fmt.Printf("Are you form future? \n")
+	//	fmt.Printf("Birth year should be less than %v. \n", year)
+	//	_, _ = fmt.Scan(&yearOfBirth)
+	//}
 
 	fmt.Printf("Enter current year\n")
 	fmt.Scan(&currentYear)
