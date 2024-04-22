@@ -58,5 +58,4 @@ func ageCalculation(yearOfBirth uint16, currentYear uint16) uint16 {
 	fmt.Printf("Your age: %v years old.\n", currentAge)
 	fmt.Println("################")
 	return currentAge
-
 }
