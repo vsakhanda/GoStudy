@@ -13,7 +13,7 @@ import "fmt"
 //Перегляд усіх завдань.
 //Позначення завдання як завершене.
 
-type Task struct {
+type Task1 struct {
 	id     int
 	title  string
 	isDone bool
@@ -21,7 +21,7 @@ type Task struct {
 
 func main() {
 
-	tasks := make(map[int]Task)
+	tasks := make(map[int]Task1)
 	nextID := 1
 
 	for {
@@ -41,7 +41,7 @@ func main() {
 			var title string
 			fmt.Print("Введіть назву завдання: ")
 			fmt.Scanln(&title)
-			tasks[nextID] = Task{id: nextID, title: title, isDone: false}
+			tasks[nextID] = Task1{id: nextID, title: title, isDone: false}
 			nextID++
 			fmt.Println("Завдання успішно додано!")
 		case 2:
