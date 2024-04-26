@@ -10,10 +10,10 @@ type Task struct {
 	isDone bool
 }
 
-func main() {
+var tasks = make(map[int]Task)
+var nextID = 1
 
-	tasks := make(map[int]Task)
-	nextID := 1
+func main() {
 
 	fmt.Println("##################")
 	fmt.Println("List of actions:")
@@ -25,67 +25,25 @@ func main() {
 	fmt.Println("##################")
 
 	for {
-
 		var selectAction (int)
 		fmt.Print("Select Action: ")
 		fmt.Scanln(&selectAction)
 
 		switch selectAction {
 		case 1:
-			fmt.Println("1. Add new task")
-			var title string
-			fmt.Print("Add title: ")
-			fmt.Scanln(&title)
-			tasks[nextID] = Task{id: nextID, title: title, isDone: false}
-			nextID++
+			addNewTask()
 		case 2:
-			fmt.Printf("Remove task action\n")
-
-			if isEmpty(tasks) {
-				fmt.Println("Empty list add new task!")
-				continue
-			}
-			displayTasks(tasks)
-			var taskID int
-			fmt.Print("Enter select ID for delete task: ")
-			fmt.Scanln(&taskID)
-
-			if task, exists := tasks[taskID]; exists {
-				tasks[taskID] = task
-				fmt.Printf("Task %v deleted successfully!\n", taskID)
-				delete(tasks, taskID)
-			} else {
-				fmt.Println("Incorrect task ID!")
-			}
+			removeTask()
 		case 3:
-			if isEmpty(tasks) {
-				fmt.Println("Empty list add new task!")
-				continue
-			}
-			displayTasks(tasks)
+			showTasks()
 		case 4:
-			fmt.Printf("Complete task\n")
-			if isEmpty(tasks) {
-				fmt.Println("Empty list add new task!")
-				continue
-			}
-			displayTasks(tasks)
-			var taskID int
-			fmt.Print("Enter task ID for complete task: ")
-			fmt.Scanln(&taskID)
-			if task, exists := tasks[taskID]; exists {
-				task.isDone = !task.isDone
-				tasks[taskID] = task
-				fmt.Println("Task completed successfully!")
-			} else {
-				fmt.Println("Incorrect task ID!")
-			}
+			completeTask()
 		case 5:
 			fmt.Println("Your choice is exit program.")
 			fmt.Println("See you next time. Thanks for using program")
 			return
-		default:
-			fmt.Println("Please select Action from list")
+			//default:
+			//	fmt.Println("Please select Action from list")
 
 		}
 	}
@@ -103,3 +61,67 @@ func displayTasks(tasks map[int]Task) {
 		fmt.Printf("%d. %s (Completed: %t)\n", id, task.title, task.isDone)
 	}
 }
+
+func addNewTask() {
+	fmt.Println("1. Add new task")
+	var title string
+	fmt.Print("Add title: ")
+	_, _ = fmt.Scanln(&title)
+	tasks[nextID] = Task{id: nextID, title: title, isDone: false}
+	fmt.Printf("You added task # %v %v \n", nextID, title)
+	nextID++
+}
+
+func removeTask() {
+	fmt.Printf("Remove task action\n")
+
+	if isEmpty(tasks) {
+		fmt.Println("Empty list add new task!")
+	}
+	displayTasks(tasks)
+	var taskID int
+	fmt.Print("Enter select ID for delete task: ")
+	fmt.Scanln(&taskID)
+
+	if task, exists := tasks[taskID]; exists {
+		tasks[taskID] = task
+		fmt.Printf("Task %v deleted successfully!\n", taskID)
+		delete(tasks, taskID)
+	} else {
+		fmt.Println("Incorrect task ID!")
+	}
+}
+
+func showTasks() {
+	if isEmpty(tasks) {
+		fmt.Println("Empty list add new task!")
+		return
+	}
+	displayTasks(tasks)
+}
+
+func completeTask() {
+	fmt.Printf("Complete task\n")
+	if isEmpty(tasks) {
+		fmt.Println("Empty list add new task!")
+	}
+	displayTasks(tasks)
+	var taskID int
+	fmt.Print("Enter task ID for complete task: ")
+	fmt.Scanln(&taskID)
+	if task, exists := tasks[taskID]; exists {
+		task.isDone = !task.isDone
+		tasks[taskID] = task
+		fmt.Println("Task completed successfully!")
+	} else {
+		fmt.Println("Incorrect task ID!")
+	}
+}
+
+//```go
+//func main() {
+//    reader := bufio.NewReader(os.Stdin)
+//    fmt.Println("Введіть назву завдання:")
+//    title, _ := reader.ReadString('\n')
+//    fmt.Println("Ви ввели:", title)
+//}
